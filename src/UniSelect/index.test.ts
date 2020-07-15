@@ -47,3 +47,17 @@ test('fallback if not match config', () => {
     }),
   ).toEqual("I'm fall back");
 });
+
+test('PlatForm like RN', () => {
+  const Platform = {
+    select: UniSelect({
+      IOS: true,
+      Android: false,
+    }),
+  };
+  expect(
+    Platform.select({
+      IOS: "I'm IOS",
+    }),
+  ).toEqual("I'm IOS");
+});
