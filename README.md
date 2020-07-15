@@ -1,5 +1,7 @@
 # @aizigao/uni-select
 
+<img alt="npm (scoped)" src="https://img.shields.io/npm/v/@aizigao/uni-select?style=for-the-badge">
+
 ## WHAT AND HOW
 
 just see src/UniSelect/index.test.ts
