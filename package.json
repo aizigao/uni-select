@@ -1,6 +1,7 @@
 {
   "name": "@aizigao/uni-select",
-  "version": "0.0.4",
+  "author": "aizigao",
+  "version": "0.0.5",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -13,6 +14,7 @@
     "test:w": "umi-test --watchAll",
     "test:coverage": "umi-test --coverage"
   },
+  "homepage": "https://github.com/aizigao/uni-select",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",

@@ -58,7 +58,7 @@ test('fallback if not match config', () => {
 });
 ```
 
-You can't use it to create A Platform.Select util like ReactNative
+You can use it to create A Platform.Select util like ReactNative
 
 ```ts
 import UniSelect from '@aizigao/uni-select';
