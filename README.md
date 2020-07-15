@@ -9,12 +9,12 @@ import UniSelect from '@aizigao/uni-select';
 
 test('normal', () => {
   const selector = UniSelect({
-    isSafari: true,
+    isIOS: true,
     isAndroid: false,
   });
 
   const rst = selector({
-    isSafari: "I'm use safari browser now",
+    isIOS: "I'm use safari browser now",
     isAndroid: "I'm use android browser now",
   });
 
@@ -24,7 +24,7 @@ test('normal', () => {
 test("can't has multi match value", () => {
   expect(() => {
     UniSelect({
-      isSafari: true,
+      isIOS: true,
       isAndroid: true,
     });
   }).toThrow('[UniSelect]: conditions mustbe unique');
@@ -32,20 +32,20 @@ test("can't has multi match value", () => {
 
 test('no match value', () => {
   const selector = UniSelect({
-    isSafari: true,
+    isIOS: true,
     isAndroid: false,
   });
   expect(
     selector({
       isAndroid: 'yyy',
-      // isSafari: 'yyy',
+      // isIOS: 'yyy',
     }),
   ).toBeNull();
 });
 
 test('fallback if not match config', () => {
   const selector = UniSelect({
-    isSafari: true,
+    isIOS: true,
     isAndroid: false,
   });
   expect(
