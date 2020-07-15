@@ -43,7 +43,7 @@ test('fallback if not match config', () => {
   });
   expect(
     selector({
-      fallback: "I'm fall back",
+      default: "I'm fall back",
     }),
   ).toEqual("I'm fall back");
 });
@@ -51,13 +51,17 @@ test('fallback if not match config', () => {
 test('PlatForm like RN', () => {
   const Platform = {
     select: UniSelect({
-      IOS: true,
-      Android: false,
+      ios: true,
+      android: false,
     }),
+    OS: 'ios',
   };
+
   expect(
     Platform.select({
-      IOS: "I'm IOS",
+      ios: "I'm IOS",
     }),
   ).toEqual("I'm IOS");
+
+  expect(Platform.OS).toEqual('ios');
 });

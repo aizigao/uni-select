@@ -56,6 +56,36 @@ test('fallback if not match config', () => {
 });
 ```
 
+You can't use it to create A Platform.Select util like ReactNative
+
+```ts
+import UniSelect from '@aizigao/uni-select';
+
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+const Platform = {
+  select: UniSelect({
+    ios: isSafari,
+    android: !isSafari,
+  }),
+  OS: isSafari ? 'ios' : 'android',
+  Version: -1,
+};
+
+expect(
+  Platform.select({
+    ios: "I'm IOS",
+  }),
+).toEqual("I'm IOS");
+
+expect(Platform.OS).toEqual('ios');
+
+const Component = Platform.select({
+  ios: () => require('ComponentIOS'),
+  android: () => require('ComponentAndroid'),
+})();
+```
+
 ## Install
 
 ```bash

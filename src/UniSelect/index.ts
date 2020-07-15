@@ -8,12 +8,12 @@ const UniSelect = <T extends string>(conditionMap: Record<T, boolean>) => {
   }
   const matchKey = matchedKeys[0] as T;
 
-  return <U>(config: Partial<Record<T | 'fallback', U>>): U | null => {
+  return <U>(config: Partial<Record<T | 'default', U>>): U | null => {
     if (matchKey in config) {
       return config[matchKey] as U;
     }
-    if ('fallback' in config) {
-      return config.fallback as U;
+    if ('default' in config) {
+      return config.default as U;
     }
     return null;
   };
