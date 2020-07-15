@@ -1,5 +1,7 @@
 # @aizigao/uni-select
 
+build you own select usually like React Native Platform.select
+
 <img alt="npm (scoped)" src="https://img.shields.io/npm/v/@aizigao/uni-select?style=for-the-badge">
 
 ## WHAT AND HOW
@@ -58,7 +60,7 @@ test('fallback if not match config', () => {
 });
 ```
 
-You can use it to create A Platform.Select util like ReactNative
+You can use it to create a Platform.Select util like ReactNative
 
 ```ts
 import UniSelect from '@aizigao/uni-select';

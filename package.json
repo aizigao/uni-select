@@ -1,7 +1,8 @@
 {
   "name": "@aizigao/uni-select",
   "author": "aizigao",
-  "version": "0.0.5",
+  "version": "0.1.0",
+  "keywords": ["React Native","RN","web", "Platform.select"],
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
