@@ -1,7 +1,7 @@
 {
   "name": "@aizigao/uni-select",
   "author": "aizigao",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "keywords": ["React Native","RN","web", "Platform.select"],
   "scripts": {
     "start": "dumi dev",
@@ -15,6 +15,7 @@
     "test:w": "umi-test --watchAll",
     "test:coverage": "umi-test --coverage"
   },
+  "files": ["dist"],
   "homepage": "https://github.com/aizigao/uni-select",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

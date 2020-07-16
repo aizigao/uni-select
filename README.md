@@ -162,6 +162,7 @@ $ npm run build
 
 ## change log
 
+### 0.2.1 remove useless npm files
 ### 0.2.0 has break change
 
 - `createSelector` not return select function any more, Now it return a Object type like `{ current: string; select: <U>(config: Record<string, U>): U}`
