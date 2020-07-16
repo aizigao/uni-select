@@ -1,12 +1,12 @@
-import UniSelect from './index';
+import createSelector from './index';
 
 test('normal', () => {
-  const selector = UniSelect({
+  const selector = createSelector({
     isIOS: true,
     isAndroid: false,
   });
 
-  const rst = selector({
+  const rst = selector.select({
     isIOS: "I'm use safari browser now",
     isAndroid: "I'm use android browser now",
   });
@@ -16,46 +16,52 @@ test('normal', () => {
 
 test("can't has multi match value", () => {
   expect(() => {
-    UniSelect({
+    createSelector({
       isIOS: true,
       isAndroid: true,
     });
-  }).toThrow('[UniSelect]: conditions mustbe unique');
+  }).toThrow('[UniSelect]: conditions must be unique');
 });
 
 test('no match value', () => {
-  const selector = UniSelect({
+  const selector = createSelector({
     isIOS: true,
     isAndroid: false,
   });
+
   expect(
-    selector({
+    selector.select({
       isAndroid: 'yyy',
       // isIOS: 'yyy',
     }),
   ).toBeNull();
+
+  expect(selector.current).toEqual('isIOS');
 });
 
 test('fallback if not match config', () => {
-  const selector = UniSelect({
-    isIOS: true,
+  const selector = createSelector({
+    isIOS: false,
     isAndroid: false,
   });
+
   expect(
-    selector({
+    selector.select({
       default: "I'm fall back",
     }),
   ).toEqual("I'm fall back");
+
+  expect(selector.current).toBeNull();
 });
 
 test('PlatForm like RN', () => {
-  const Platform = {
-    select: UniSelect({
-      ios: true,
-      android: false,
-    }),
-    OS: 'ios',
+  const Platform = createSelector({
+    ios: true,
+    android: false,
+  }) as ReturnType<typeof createSelector> & {
+    OS: string | null;
   };
+  Platform.OS = Platform.current;
 
   expect(
     Platform.select({

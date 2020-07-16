@@ -8,16 +8,78 @@ build you own select usually like React Native Platform.select
 
 just see src/UniSelect/index.test.ts
 
+You can use it to create a Platform.Select util like ReactNative
+
 ```ts
-import UniSelect from '@aizigao/uni-select';
+import createSelector from '@aizigao/uni-select';
+
+// image below val is always Truely
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+const Platform = createSelector({
+  ios: true,
+  android: false,
+}) as ReturnType<typeof createSelector> & {
+  OS: string | null;
+};
+Platform.OS = Platform.current;
+
+Platform.select({
+  ios: "I'm IOS",
+}); // Return "I'm IOS"
+Platform.OS; // ios
+```
+
+**extends original React Native's `Platform` for more possible**
+
+> detect more android special manufacturer
+
+> detect iphoneX
+
+```ts
+import createSelector from '@aizigao/uni-select';
+import { Platform } from 'react-native';
+
+// TIP: You need  set conditions by youself
+const androidXiaomi = false;
+const androidSamsung = true;
+const isIphoneX = false; // detect it can use [react-native-iphone-x-helper](https://www.npmjs.com/package/react-native-iphone-x-helper)
+
+const Platform = createSelector({
+  iosGeneral: Platform.OS === 'ios' && !isIphoneX,
+  iosIphoneX: Platform.OS === 'ios' && isIphoneX,
+  androidSamsung: Platform.OS === 'android' && androidSamsung,
+  androidXiaomi: Platform.OS === 'android' && androidXiaomi,
+  androidGeneral:
+    Platform.OS === 'android' && !androidSamsung && !androidXiaomi,
+}) as ReturnType<typeof createSelector> & {
+  OS: string | null;
+};
+
+// use OS instead of current property
+Platform.OS = Platform.current;
+
+const spMsgForPlatfrom = Platform.select({
+  androidSamsung: "I'm smasung devices",
+  androidXiaomi: "I'm Xiaomi devices",
+}); //"I'm smasung devices"
+
+const currentVerson = Platform.OS; // androidSamsung
+const currentVersonSame = Platform.current; // androidSamsung
+```
+
+**other test cases**
+
+```ts
+import createSelector from './index';
 
 test('normal', () => {
-  const selector = UniSelect({
+  const selector = createSelector({
     isIOS: true,
     isAndroid: false,
   });
 
-  const rst = selector({
+  const rst = selector.select({
     isIOS: "I'm use safari browser now",
     isAndroid: "I'm use android browser now",
   });
@@ -27,67 +89,43 @@ test('normal', () => {
 
 test("can't has multi match value", () => {
   expect(() => {
-    UniSelect({
+    createSelector({
       isIOS: true,
       isAndroid: true,
     });
-  }).toThrow('[UniSelect]: conditions mustbe unique');
+  }).toThrow('[UniSelect]: conditions must be unique');
 });
 
 test('no match value', () => {
-  const selector = UniSelect({
+  const selector = createSelector({
     isIOS: true,
     isAndroid: false,
   });
+
   expect(
-    selector({
+    selector.select({
       isAndroid: 'yyy',
       // isIOS: 'yyy',
     }),
   ).toBeNull();
+
+  expect(selector.current).toEqual('isIOS');
 });
 
 test('fallback if not match config', () => {
-  const selector = UniSelect({
-    isIOS: true,
+  const selector = createSelector({
+    isIOS: false,
     isAndroid: false,
   });
+
   expect(
-    selector({
-      fallback: "I'm fall back",
+    selector.select({
+      default: "I'm fall back",
     }),
   ).toEqual("I'm fall back");
+
+  expect(selector.current).toBeNull();
 });
-```
-
-You can use it to create a Platform.Select util like ReactNative
-
-```ts
-import UniSelect from '@aizigao/uni-select';
-
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-const Platform = {
-  select: UniSelect({
-    ios: isSafari,
-    android: !isSafari,
-  }),
-  OS: isSafari ? 'ios' : 'android',
-  Version: -1,
-};
-
-expect(
-  Platform.select({
-    ios: "I'm IOS",
-  }),
-).toEqual("I'm IOS");
-
-expect(Platform.OS).toEqual('ios');
-
-const Component = Platform.select({
-  ios: () => require('ComponentIOS'),
-  android: () => require('ComponentAndroid'),
-})();
 ```
 
 ## Install
@@ -121,3 +159,11 @@ Build library via `father-build`,
 ```bash
 $ npm run build
 ```
+
+## change log
+
+### 0.2.0 has break change
+
+- `createSelector` not return select function any more, Now it return a Object type like `{ current: string; select: <U>(config: Record<string, U>): U}`
+
+### 0.1.0 first version

@@ -1,14 +1,15 @@
-const UniSelect = <T extends string>(conditionMap: Record<T, boolean>) => {
+const createSelector = <T extends string>(conditionMap: Record<T, boolean>) => {
   const matchedKeys = Object.entries(conditionMap)
     .filter(([k, v]) => v)
     .map(([k]) => k);
 
   if (matchedKeys.length > 1) {
-    throw new Error('[UniSelect]: conditions mustbe unique');
+    throw new Error('[UniSelect]: conditions must be unique');
   }
+
   const matchKey = matchedKeys[0] as T;
 
-  return <U>(config: Partial<Record<T | 'default', U>>): U | null => {
+  const select = <U>(config: Partial<Record<T | 'default', U>>): U | null => {
     if (matchKey in config) {
       return config[matchKey] as U;
     }
@@ -17,6 +18,11 @@ const UniSelect = <T extends string>(conditionMap: Record<T, boolean>) => {
     }
     return null;
   };
+
+  return {
+    select,
+    current: matchKey || null,
+  };
 };
 
-export default UniSelect;
+export default createSelector;
