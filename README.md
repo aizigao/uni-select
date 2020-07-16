@@ -71,7 +71,7 @@ const currentVersonSame = Platform.current; // androidSamsung
 **other test cases**
 
 ```ts
-import createSelector from './index';
+import createSelector from '@aizigao/uni-select';
 
 test('normal', () => {
   const selector = createSelector({
