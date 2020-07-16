@@ -21,7 +21,6 @@ const PlatformO = createSelector({
   android: false,
 });
 const Platform = { ...PlatformO, OS: PlatformO.current };
-Platform.OS = Platform.current;
 
 Platform.select({
   ios: "I'm IOS",
@@ -53,10 +52,8 @@ const PlatformO = createSelector({
     Platform.OS === 'android' && !androidSamsung && !androidXiaomi,
 });
 
-const Platform = { ...PlatformO, OS: PlatformO.current };
-
 // use OS instead of current property
-Platform.OS = Platform.current;
+const Platform = { ...PlatformO, OS: PlatformO.current };
 
 const spMsgForPlatfrom = Platform.select({
   androidSamsung: "I'm smasung devices",
