@@ -1,3 +1,3 @@
-import UniSelect from './UniSelect';
+import createSelector from './UniSelect';
 
-export default UniSelect;
+export default createSelector;

@@ -1,7 +1,7 @@
 const createSelector = <T extends string>(conditionMap: Record<T, boolean>) => {
-  const matchedKeys = Object.entries(conditionMap)
-    .filter(([k, v]) => v)
-    .map(([k]) => k);
+  const matchedKeys = Object.keys(conditionMap).filter(
+    k => conditionMap[k as keyof typeof conditionMap],
+  );
 
   if (matchedKeys.length > 1) {
     throw new Error('[UniSelect]: conditions must be unique');

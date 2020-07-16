@@ -36,7 +36,7 @@ Platform.OS; // ios
 
 ```ts
 import createSelector from '@aizigao/uni-select';
-import { Platform } from 'react-native';
+import { Platform as PlatformRN } from 'react-native';
 
 // TIP: You need  set conditions by youself
 const androidXiaomi = false;
@@ -44,12 +44,12 @@ const androidSamsung = true;
 const isIphoneX = false; // detect it can use [react-native-iphone-x-helper](https://www.npmjs.com/package/react-native-iphone-x-helper)
 
 const PlatformO = createSelector({
-  iosGeneral: Platform.OS === 'ios' && !isIphoneX,
-  iosIphoneX: Platform.OS === 'ios' && isIphoneX,
-  androidSamsung: Platform.OS === 'android' && androidSamsung,
-  androidXiaomi: Platform.OS === 'android' && androidXiaomi,
+  iosGeneral: PlatformRN.OS === 'ios' && !isIphoneX,
+  iosIphoneX: PlatformRN.OS === 'ios' && isIphoneX,
+  androidSamsung: PlatformRN.OS === 'android' && androidSamsung,
+  androidXiaomi: PlatformRN.OS === 'android' && androidXiaomi,
   androidGeneral:
-    Platform.OS === 'android' && !androidSamsung && !androidXiaomi,
+    PlatformRN.OS === 'android' && !androidSamsung && !androidXiaomi,
 });
 
 // use OS instead of current property
