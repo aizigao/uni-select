@@ -2,7 +2,8 @@
 
 build you own select usually like React Native Platform.select
 
-<img alt="npm (scoped)" src="https://img.shields.io/npm/v/@aizigao/uni-select?style=for-the-badge">
+<img alt="npm (scoped)" src="https://img.shields.io/npm/v/@aizigao/uni-select?style=for-the-badge" style='display:inline-block' >
+<img alt="npm bundle size (scoped)" style='display:inline-block' src="https://img.shields.io/bundlephobia/minzip/@aizigao/uni-select?style=for-the-badge">
 
 ## WHAT AND HOW
 
