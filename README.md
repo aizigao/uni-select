@@ -16,12 +16,11 @@ import createSelector from '@aizigao/uni-select';
 // image below val is always Truely
 const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-const Platform = createSelector({
+const PlatformO = createSelector({
   ios: true,
   android: false,
-}) as ReturnType<typeof createSelector> & {
-  OS: string | null;
-};
+});
+const Platform = { ...PlatformO, OS: PlatformO.current };
 Platform.OS = Platform.current;
 
 Platform.select({
@@ -45,16 +44,16 @@ const androidXiaomi = false;
 const androidSamsung = true;
 const isIphoneX = false; // detect it can use [react-native-iphone-x-helper](https://www.npmjs.com/package/react-native-iphone-x-helper)
 
-const Platform = createSelector({
+const PlatformO = createSelector({
   iosGeneral: Platform.OS === 'ios' && !isIphoneX,
   iosIphoneX: Platform.OS === 'ios' && isIphoneX,
   androidSamsung: Platform.OS === 'android' && androidSamsung,
   androidXiaomi: Platform.OS === 'android' && androidXiaomi,
   androidGeneral:
     Platform.OS === 'android' && !androidSamsung && !androidXiaomi,
-}) as ReturnType<typeof createSelector> & {
-  OS: string | null;
-};
+});
+
+const Platform = { ...PlatformO, OS: PlatformO.current };
 
 // use OS instead of current property
 Platform.OS = Platform.current;
@@ -160,9 +159,12 @@ Build library via `father-build`,
 $ npm run build
 ```
 
-## change log
+## CHANGELOG
+
+### 0.2.2 moidify examples more friendly for typescript
 
 ### 0.2.1 remove useless npm files
+
 ### 0.2.0 has break change
 
 - `createSelector` not return select function any more, Now it return a Object type like `{ current: string; select: <U>(config: Record<string, U>): U}`

@@ -55,13 +55,12 @@ test('fallback if not match config', () => {
 });
 
 test('PlatForm like RN', () => {
-  const Platform = createSelector({
+  let PlatformO = createSelector({
     ios: true,
     android: false,
-  }) as ReturnType<typeof createSelector> & {
-    OS: string | null;
-  };
-  Platform.OS = Platform.current;
+  });
+
+  const Platform = { ...PlatformO, OS: PlatformO.current };
 
   expect(
     Platform.select({
